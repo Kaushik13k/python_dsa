@@ -86,36 +86,66 @@ class LinkedList:
             temp = temp.next
             count +=1
         return False
+    
+    def delete_index(self, index):
+        if index < 0:
+            raise ValueError("Index should be a non-negative integer.")
 
-# new_instance = LinkedList()
-# new_instance.traversal()
+        if index == 0:
+            if self.head is None:
+                raise IndexError("Cannot delete from an empty list.")
+            deleted_value = self.head.value
+            self.head = self.head.next
+            return deleted_value
 
-# new_instance.append(1)
-# new_instance.append(2)
-# new_instance.append(3)
-# new_instance.append(4)
-# new_instance.append(5)
+        prev = self.head
+        for i in range(index - 2):
+            if prev is None or prev.next is None:
+                raise IndexError("Index out of bounds.")
+            prev = prev.next
 
-# print("------The LL after append is------")
-# new_instance.traversal()
+        if prev.next is None:
+            raise IndexError("Index out of bounds.")
 
-# new_instance.prepend(0)
-# new_instance.prepend(-1)
+        deleted_value = prev.next.value
+        prev.next = prev.next.next
 
-# print("------The LL after prepend is------")
-# new_instance.traversal()
-
-# new_instance.insert(10, 2)
-
-# print("------The LL after index insert is------")
-# new_instance.traversal()
-
-# print("------The LL after search value is------")
-# print(new_instance.search_value(11))
-
-# print("------The LL after search index is------")
-# print(new_instance.search_index(11))
+        return deleted_value
 
 
 
 
+
+new_instance = LinkedList()
+new_instance.traversal()
+
+new_instance.append(1)
+new_instance.append(2)
+new_instance.append(3)
+new_instance.append(4)
+new_instance.append(5)
+
+print("------The LL after append is------")
+new_instance.traversal()
+
+new_instance.prepend(0)
+new_instance.prepend(-1)
+
+print("------The LL after prepend is------")
+new_instance.traversal()
+
+new_instance.insert(10, 2)
+
+print("------The LL after index insert is------")
+new_instance.traversal()
+
+print("------The LL after search value is------")
+print(new_instance.search_value(11))
+
+print("------The LL after search index is------")
+print(new_instance.search_index(11))
+
+print(new_instance.delete_index(3))
+
+print("------The LL after Delete index is------")
+new_instance.traversal()
