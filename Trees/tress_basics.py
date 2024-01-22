@@ -23,8 +23,49 @@ class BinaryTree:
             if self.custom_list[val] == value:
                 return f"found the element {value} in postition {val}"
         return "element not found"
+    
+    def pre_order_traversal(self, index):
+        if index > self.last_used_index:
+            return
+        print(self.custom_list[index]) # ROOT
+        self.pre_order_traversal(index * 2) # LEFT: cell[2x]
+        self.pre_order_traversal(index * 2 + 1) # RIGHT: cell[2x + 1]
+    
+    def in_order_traversal(self, index):
+        if index > self.last_used_index:
+            return
+        self.in_order_traversal(index * 2) # LEFT: cell[2x]
+        print(self.custom_list[index]) # ROOT
+        self.in_order_traversal(index * 2 + 1) # RIGHT: cell[2x + 1]
+
+    def post_order_traversal(self, index):
+        if index > self.last_used_index:
+            return
+        self.post_order_traversal(index * 2) # LEFT: cell[2x]
+        self.post_order_traversal(index * 2 + 1) # RIGHT: cell[2x + 1]
+        print(self.custom_list[index]) # ROOT
+
+    def level_order_traversal(self, index):
+        for i in range(index, self.last_used_index +1):
+            print(self.custom_list[i])
+
+    def delete_tree(self):
+        self.custom_list = None
+        return "The tree is been deleted!"
 
 
-tree_instance = BinaryTree(4)
+tree_instance = BinaryTree(7)
 tree_instance.insert_node(1)
-tree_instance.search_element(1)
+tree_instance.insert_node(2)
+tree_instance.insert_node(3)
+tree_instance.insert_node(4)
+tree_instance.insert_node(5)
+tree_instance.insert_node(6)
+tree_instance.search_element(2)
+
+tree_instance.pre_order_traversal(1)
+tree_instance.in_order_traversal(1)
+tree_instance.post_order_traversal(1)
+tree_instance.level_order_traversal(1)
+
+tree_instance.delete_tree()
