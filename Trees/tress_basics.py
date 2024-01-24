@@ -2,8 +2,6 @@
 
 ## LEFT: cell[2x]
 ## RIGHT: cell[2x + 1]
-
-
 class BinaryTree:
     def __init__(self, size):
         self.custom_list = size * [None]
@@ -48,6 +46,15 @@ class BinaryTree:
     def level_order_traversal(self, index):
         for i in range(index, self.last_used_index +1):
             print(self.custom_list[i])
+        
+    def delete_node(self, value):
+        if self.last_used_index ==0:
+            return "There is nothing to delete"
+        for i in range(1, self.last_used_index +1):
+            if self.custom_list[i] == value:
+                self.custom_list[i] = self.custom_list[self.last_used_index]
+                self.last_used_index -= 1
+                return f"The value {value} is deleted!"
 
     def delete_tree(self):
         self.custom_list = None
